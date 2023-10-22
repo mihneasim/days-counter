@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import './components/line-item.js';
-
+import { monthsData } from './services.js';
 
 @customElement('days-counter-app')
 export class DaysCounterApp extends LitElement {
@@ -36,19 +36,32 @@ export class DaysCounterApp extends LitElement {
     }
   `;
 
+  onMonthChange(ev: Event) {
+    this.workingDaysOfMonth =
+      monthsData[
+        parseInt((ev.target as HTMLInputElement).value, 10)
+      ].workingDays;
+  }
+
   render() {
     return html`
       <main>
         <h1>Counting workdays</h1>
-        <div><line-item workingDaysOfMonth=${this.workingDaysOfMonth} ></div>
 
-        <div>Total Working Days: ${this.workingDaysOfMonth}</div>
+        <div>
+          <select @change=${this.onMonthChange}>
+            ${monthsData.map(
+              (x, ind) => html`<option .value=${String(ind)}>${x}</option>`
+            )}
+          </select>
+        </div>
+
+        <div><line-item workingDaysOfMonth=${this.workingDaysOfMonth} ></div>
 
       </main>
 
       <p class="app-footer">
-        🚽 Made with love by
-        <a
+        🦔 Created using <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/open-wc"
