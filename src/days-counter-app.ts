@@ -1,5 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import './components/line-item.js';
+
 
 @customElement('days-counter-app')
 export class DaysCounterApp extends LitElement {
@@ -38,6 +40,7 @@ export class DaysCounterApp extends LitElement {
     return html`
       <main>
         <h1>Counting workdays</h1>
+        <div><line-item workingDaysOfMonth=${this.workingDaysOfMonth} ></div>
 
         <div>Total Working Days: ${this.workingDaysOfMonth}</div>
 
