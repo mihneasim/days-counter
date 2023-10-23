@@ -58,6 +58,8 @@
     ],
     "rules": {
       "no-unused-vars": "off",
+      "no-useless-constructor": "off",
+      "no-cond-assign": "warn",
       "@typescript-eslint/no-unused-vars": [
         "error"
       ],
@@ -68,7 +70,8 @@
         {
           "ignorePackages": true
         }
-      ]
+      ],
+      "max-classes-per-file": ["error", 3]
     }
   },
   "prettier": {

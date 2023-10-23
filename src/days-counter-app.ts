@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import './components/line-item.js';
-import { monthsData } from './services.js';
+import { monthsData } from './services/months.js';
 
 @customElement('days-counter-app')
 export class DaysCounterApp extends LitElement {
@@ -56,7 +56,7 @@ export class DaysCounterApp extends LitElement {
           </select>
         </div>
 
-        <div><line-item workingDaysOfMonth=${this.workingDaysOfMonth} ></div>
+        <div><line-item workingDaysOfMonth=${this.workingDaysOfMonth}></div>
 
       </main>
 
