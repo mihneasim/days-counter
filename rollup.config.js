@@ -3,6 +3,8 @@ import babel from '@rollup/plugin-babel';
 import html from '@web/rollup-plugin-html';
 import { importMetaAssets } from '@web/rollup-plugin-import-meta-assets';
 import esbuild from 'rollup-plugin-esbuild';
+// import css from 'rollup-plugin-import-css';
+import copy from 'rollup-plugin-copy';
 import { generateSW } from 'rollup-plugin-workbox';
 import path from 'path';
 
@@ -18,6 +20,7 @@ export default {
   preserveEntrySignatures: false,
 
   plugins: [
+    // css(),
     /** Enable using HTML as rollup entrypoint */
     html({
       minify: true,
@@ -30,7 +33,7 @@ export default {
     esbuild({
       minify: true,
       target: ['chrome64', 'firefox67', 'safari11.1'],
-    }),    
+    }),
     /** Bundle assets references via import.meta.url */
     importMetaAssets(),
     /** Minify html and css tagged template literals */
@@ -66,6 +69,19 @@ export default {
       skipWaiting: true,
       clientsClaim: true,
       runtimeCaching: [{ urlPattern: 'polyfills/*.js', handler: 'CacheFirst' }],
+    }),
+    // Copy Shoelace assets to dist/shoelace
+    copy({
+      copyOnce: true,
+      targets: [
+        {
+          src: path.resolve(
+            __dirname,
+            'node_modules/@shoelace-style/shoelace/dist/assets'
+          ),
+          dest: path.resolve(__dirname, 'dist/shoelace'),
+        },
+      ],
     }),
   ],
 };
