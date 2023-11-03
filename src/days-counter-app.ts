@@ -19,6 +19,8 @@ setBasePath('/shoelace');
 export class DaysCounterApp extends LitElement {
   @property({ type: Number }) workingDaysOfMonth = 21;
 
+  @property({ type: Array }) persons = [{}];
+
   static styles = css`
     :host {
       min-height: 100vh;
@@ -55,6 +57,10 @@ export class DaysCounterApp extends LitElement {
       ].workingDays;
   }
 
+  addLine() {
+    this.persons = [...this.persons, {}];
+  }
+
   render() {
     return html`
       <main>
@@ -68,15 +74,24 @@ export class DaysCounterApp extends LitElement {
           </select>
         </div>
 
-        <div><line-item workingDaysOfMonth=${this.workingDaysOfMonth}></div>
-
+        <div>
+          ${this.persons.map(
+            () =>
+              html`<line-item
+                workingDaysOfMonth=${this.workingDaysOfMonth}
+              ></line-item>`
+          )}
+        </div>
+        <span class="plus" @click=${this.addLine} @keyup=${this.addLine}
+          >Add line</span
+        >
       </main>
 
       <p class="app-footer">
-      <sl-icon name="7-square"></sl-icon>
+        <sl-icon name="7-square"></sl-icon>
 
-        
-        🦔 Created using <a
+        🦔 Created using
+        <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/open-wc"
