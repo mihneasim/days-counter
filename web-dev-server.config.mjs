@@ -2,6 +2,8 @@
 
 import { copy } from '@web/rollup-plugin-copy';
 
+import css from 'rollup-plugin-import-css';
+
 import { fromRollup } from '@web/dev-server-rollup';
 
 /** Use Hot Module replacement by adding --hmr to the start command */
@@ -43,6 +45,8 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
         },
       ],
     }),
+
+    fromRollup(css)(),
   ],
 
   // See documentation for all available options
